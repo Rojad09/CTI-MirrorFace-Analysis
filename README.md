@@ -9,9 +9,11 @@
 ##  Executive Summary / エグゼクティブサマリー（事業計画概要）
 
 **[English]**
+
 This project translates and analyzes native Japanese threat intelligence regarding "MirrorFace," an Advanced Persistent Threat (APT) targeting Japanese critical infrastructure, media, and political entities. By synthesizing JPCERT/CC reports, this project maps the actor's Tactics, Techniques, and Procedures (TTPs) to the MITRE ATT&CK framework and provides actionable Sigma detection rules for global Security Operations Centers (SOCs). I found Mirrorface to be an interesting group, as they solely target Japan. I will be doing research, writing as I learn more.
 
 **[日本語]**
+
 本プロジェクトは、日本の重要インフラ、メディア、政治機関を標的とするAPT攻撃グループ「MirrorFace」に関するJPCERT/CCの脅威インテリジェンスを分析・翻訳したものです。攻撃者のTTPs（戦術、技術、手順）をMITRE ATT&CKフレームワークにマッピングし、グローバルなSOCチーム向けに実用的なSigma検知ルールを作成・提案します。
 
 ---
