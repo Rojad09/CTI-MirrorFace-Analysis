@@ -6,7 +6,7 @@
 
 ---
 
-##  Executive Summary / エグゼクティブサマリー（事業計画概要）
+##  Executive Summary / エグゼクティブサマリー（エグゼクティブサマリー）
 
 **[English]**
 
