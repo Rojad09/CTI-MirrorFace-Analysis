@@ -51,9 +51,9 @@ Everything in this repo is based on open-source intelligence. No classified data
 
 ## Quick Links / クイックリンク
  
-- 
-- 
-- 
+- [Full Threat Intelligence Report](reports/MirrorFace_Threat_Intel_Report.md)
+- [Sigma Detection Rules](detections/)
+- [Sources & References](references/sources.md)
 
 ---
 
