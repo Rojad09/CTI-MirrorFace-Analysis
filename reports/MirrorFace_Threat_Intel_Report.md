@@ -43,3 +43,22 @@ MirrorFaceは、少なくとも2019年から日本の組織を標的にしてい
 ---
 
 ## 2. Who Is MirrorFace?
+
+MirrorFace is tracked under different names depending on which security vendor is writing about them. Upon further investigation, the aliases that I am able to find are as follows:
+
+- **JPCERT/CC** → MirrorFace
+- **Trend Micro** → Earth Kasha
+- **Cybereason** → Cuckoo Spear
+- **Microsoft** → Purple Typhoon (formerly Potassium)
+- **Multiple vendors** → Considered a subgroup of APT10
+
+> **Why the different names?** Researching this group highlighted a common challenge in Cyber Threat Intelligence that often complicates Advanced Persistent Threat investigations: threat actor convergence. Because security vendors frequently discover and name threats independently, a single group often accumulates multiple aliases before the industry reaches a consensus. Recognizing these overlaps is a critical analytical skill. In this specific case, it is essential to understand that MirrorFace, Earth Kasha, and Purple Typhoon all refer to the same underlying threat actor.
+
+**Target history:**
+- **Pre-2023:** Media organizations, political parties, think tanks, universities, diplomatic entities
+- **2023 onward:** Manufacturers and research institutions (shift toward intellectual property theft)
+- **Mid-2024:** First European target: a Central European diplomatic institute (using Expo 2025 Osaka as a lure)
+
+**Primary goal:** Espionage. They are not financially motivated like ransomware groups. They want data, which refers to input such as government communications, defense research, political strategy documents.
+
+---
