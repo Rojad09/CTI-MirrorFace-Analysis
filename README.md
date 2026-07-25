@@ -38,13 +38,13 @@ Everything in this repo is based on open-source intelligence. No classified data
 | Field | Detail |
 |-------|--------|
 | **Name** | MirrorFace |
-| **Also Tracked As** | Earth Kasha (Trend Micro), APT10 subgroup — *"Bronze Riverside and Purple Typhoon (Microsoft)" appears in some general APT10-umbrella naming lists, but I believe it to refer to the APT10 the parent group, rather than MirrorFace directly (although both very similar as it is already). |
+| **Also Tracked As** | Earth Kasha (Trend Micro), APT10 subgroup - "Bronze Riverside and Purple Typhoon (Microsoft)" appears in some general APT10-umbrella naming lists, but I believe it to refer to the APT10 the parent group, rather than MirrorFace directly (although both very similar as it is already). |
 | **Origin** | China-aligned |
 | **Active Since** | 2019 |
 | **Primary Targets** | Japan - media, political orgs, think tanks, universities, manufacturers, research institutes |
 | **Motivation** | Espionage and data exfiltration |
 | **Signature Malware** | LODEINFO, NOOPDOOR (aka HiddenFace) |
-| **Newer Tools** | MirrorStealer, ROAMINGMOUSE, ANEL, SharpHide, GOST proxy, AsyncRAT (heavily customized by MirrorFace — confirmed directly via ESET's full published research, including Tor-based C2 and victim-specific sample tagging) |
+| **Newer Tools** | MirrorStealer, ROAMINGMOUSE, ANEL, SharpHide, GOST proxy, AsyncRAT (heavily customized by MirrorFace - confirmed directly via ESET's full published research, including Tor-based C2 and victim-specific sample tagging) |
 | **Notable Technique** | Abusing Windows Sandbox to hide malware from antivirus detection |
 
 ---
