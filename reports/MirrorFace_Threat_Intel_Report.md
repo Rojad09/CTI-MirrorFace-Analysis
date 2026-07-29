@@ -61,3 +61,25 @@ MirrorFace is tracked under different names depending on which security vendor i
 **Primary goal:** Espionage. Unlike financially motivated ransomware groups, this actor's objective is pure data exfiltration, specifically targeting high-value intelligence like government communications, defense research, and political strategy documents.
 
 ---
+
+## 3. How Their Attacks Have Evolved
+
+This is the section I found most useful when trying to understand MirrorFace, because it shows a real attacker thinking and adapting; not just running the same playbook forever.
+
+### Campaign A (2019–2022) — Spear-Phishing Phase
+
+MirrorFace's original method was straightforward: send a carefully crafted email with a malicious attachment to a specific target. The emails were written in Japanese and referenced real Japanese political events, which tells us the operators have Japanese language capability or local knowledge.
+
+Opening the attachment delivered LODEINFO, their primary backdoor.
+
+### Campaign B (April 2023 onward) — Vulnerability Exploitation Phase
+
+They stopped relying entirely on phishing and started exploiting unpatched vulnerabilities in internet-facing network devices:
+
+- **Array AG VPN** — CVE-2023-28461 (CVSS 9.8, unauthenticated RCE)
+- **Fortinet FortiGate/FortiProxy** — CVE-2023-27997 (heap-based buffer overflow in SSL-VPN)
+- **Proself** (a Japanese file-sharing product) — CVE-2023-45727
+
+**Sourcing note:** JPCERT/CC's own July 2024 blog post confirms MirrorFace leveraging vulnerabilities in Array AG and FortiGate, and states Proself "may also be exploited," but doesn't cite specific CVE numbers. The exact CVE-to-product mapping above is confirmed directly in Trend Micro's November 19, 2024 primary research on Earth Kasha (with direct NVD links for each CVE), corroborated independently by CISA's Known Exploited Vulnerabilities catalog.
+
+**Why does this matter?** This shift is significant. Phishing requires a human to click something. Exploiting a vulnerable VPN appliance requires no user interaction. You just scan for unpatched devices and exploit them. It also tells us their targets weren't patching fast enough, which is a common real-world problem.
