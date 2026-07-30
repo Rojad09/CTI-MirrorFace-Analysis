@@ -83,3 +83,18 @@ They stopped relying entirely on phishing and started exploiting unpatched vulne
 **Sourcing note:** JPCERT/CC's own July 2024 blog post confirms MirrorFace leveraging vulnerabilities in Array AG and FortiGate, and states Proself "may also be exploited," but doesn't cite specific CVE numbers. The exact CVE-to-product mapping above is confirmed directly in Trend Micro's November 19, 2024 primary research on Earth Kasha (with direct NVD links for each CVE), corroborated independently by CISA's Known Exploited Vulnerabilities catalog.
 
 **Why does this matter?** This shift is significant. Phishing requires a human to click something. Exploiting a vulnerable VPN appliance requires no user interaction. You just scan for unpatched devices and exploit them. It also tells us their targets weren't patching fast enough, which is a common real-world problem.
+
+### Campaign C (June 2023 onward) — Windows Sandbox Evasion Phase
+This is where it gets technically interesting. MirrorFace started running their malware *inside* Windows Sandbox — a legitimate built-in Windows feature designed to let you run untrusted software safely.
+
+Here is the attack chain step by step:
+1. Attacker gains initial access (via phishing or vulnerability exploitation)
+2. Attacker enables Windows Sandbox on the host machine (this requires admin rights and a system reboot).
+3. Attacker drops the necessary files on the victim machine: a .wsb (Windows Sandbox configuration) file, an extraction script, and a password-protected archive containing the malware payload.
+4. Attacker creates a Scheduled Task on the host machine. This task is configured to launch the Sandbox silently under a different user profile, ensuring the victim never sees the Sandbox window pop up.
+5. When the Sandbox starts, the .wsb config automatically mounts the host folder and executes the script.
+6. The script extracts the malware and establishes a connection to the attacker's C2 server inside the Sandbox, completely hiding the malicious execution and network traffic from the host's antivirus software.
+
+> **Why this is clever:** Windows Sandbox is meant to *protect* you by isolating untrusted software. MirrorFace flipped this, as they used the isolation to hide *from* your security tools. As of January 2025, Japan's National Police Agency (NPA) and NISC issued a joint advisory specifically warning about this evasion technique.
+
+
