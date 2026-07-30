@@ -80,9 +80,9 @@ They stopped relying entirely on phishing and started exploiting unpatched vulne
 - **Fortinet FortiGate/FortiProxy** — CVE-2023-27997 (heap-based buffer overflow in SSL-VPN)
 - **Proself** (a Japanese file-sharing product) — CVE-2023-45727
 
-**Sourcing note:** JPCERT/CC's own July 2024 blog post confirms MirrorFace leveraging vulnerabilities in Array AG and FortiGate, and states Proself "may also be exploited," but doesn't cite specific CVE numbers. The exact CVE-to-product mapping above is confirmed directly in Trend Micro's November 19, 2024 primary research on Earth Kasha (with direct NVD links for each CVE), corroborated independently by CISA's Known Exploited Vulnerabilities catalog.
+> **Sourcing note:** JPCERT/CC's own July 2024 blog post confirms MirrorFace leveraging vulnerabilities in Array AG and FortiGate, and states Proself "may also be exploited," but doesn't cite specific CVE numbers. The exact CVE-to-product mapping above is confirmed directly in Trend Micro's November 19, 2024 primary research on Earth Kasha (with direct NVD links for each CVE), corroborated independently by CISA's Known Exploited Vulnerabilities catalog.
 
-**Why does this matter?** This shift is significant. Phishing requires a human to click something. Exploiting a vulnerable VPN appliance requires no user interaction. You just scan for unpatched devices and exploit them. It also tells us their targets weren't patching fast enough, which is a common real-world problem.
+> **Why does this matter?** This shift is significant. Phishing requires a human to click something. Exploiting a vulnerable VPN appliance requires no user interaction. You just scan for unpatched devices and exploit them. It also tells us their targets weren't patching fast enough, which is a common real-world problem.
 
 ### Campaign C (June 2023 onward) — Windows Sandbox Evasion Phase
 This is where it gets technically interesting. MirrorFace started running their malware *inside* Windows Sandbox — a legitimate built-in Windows feature designed to let you run untrusted software safely.
