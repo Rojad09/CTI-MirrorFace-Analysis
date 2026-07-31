@@ -18,6 +18,7 @@
 
 1. [Executive Summary](#1-executive-summary)
 2. [Who Is MirrorFace?](#2-who-is-mirrorface)
+3. [How Their Attacks Have Evolved](#3-how-their-attacks-have-evolved)
 * **(ADDING MORE AS I FINISH THE REPORT)**
 
 ---
@@ -97,4 +98,29 @@ Here is the attack chain step by step:
 
 > **Why this is clever:** Windows Sandbox is meant to *protect* you by isolating untrusted software. MirrorFace flipped this, as they used the isolation to hide *from* your security tools. As of January 2025, Japan's National Police Agency (NPA) and NISC issued a joint advisory specifically warning about this evasion technique.
 
+### Campaign D (2024–2025) — Expansion Beyond Japan, and a Return to Phishing
+ESET named the mid-2024 expansion Operation AkaiRyū (赤龍 — Japanese for "Red Dragon"). Reviewing ESET's primary research directly reveals details substantially richer than what secondary sources conveyed:
+ 
+**Two documented cases in 2024:** On June 20, 2024, MirrorFace targeted two employees of a Japanese research institute using a malicious password-protected Word document. Then on August 26, 2024, MirrorFace targeted a Central European diplomatic institute, which is the first confirmed European target. They used a two-stage spear-phishing email referencing a real prior interaction between the institute and a Japanese NGO. The lure referenced Expo 2025 in Osaka, and the actual malicious payload was only sent after the target replied to the initial benign email.
+ 
+**New tools confirmed directly:** ANEL (also called UPPERCUT), a backdoor previously believed exclusive to APT10 and thought abandoned since 2018–2019, reappeared with updated version numbers (5.5.4), considered strong evidence that its development had restarted. MirrorFace also began using a heavily customized variant of the publicly available AsyncRAT, run inside Windows Sandbox via a complex execution chain, and started abusing Visual Studio Code's remote tunnels feature for stealthy C2 — a technique also used by other China-aligned groups (Tropic Trooper, Mustang Panda).
+ 
+**Victim-specific targeting:** In the diplomatic institute case, ESET tracked two compromised machines over roughly a week. Machine A belonged to a project coordinator; Machine B belonged to an IT employee. MirrorFace deployed different tools and pursued different objectives on each: personal data theft on Machine A (including exporting Google Chrome's stored contact info, autofill data, and stored credit card information into a SQLite database), and deeper network access plus lateral-movement tooling (Rubeus, frp) on Machine B.
+ 
+**A genuine attribution disagreement worth knowing:** ESET's observation of ANEL, combined with targeting overlap and code similarities, led them to firmly change their attribution stance — they now formally consider MirrorFace to be a subgroup under the APT10 umbrella. Trend Micro, conversely, has historically considered the relationship correlated but prefers to track Earth Kasha (MirrorFace) as its own distinct operation. This is a real, sourced disagreement between two credible vendors, highlighting the complexity of tracking converging threat actors.
+ 
+**The campaign continued into 2025.** Concurrently, Trend Micro documented a separate campaign detected in March 2025 targeting government agencies and public institutions in Taiwan and Japan. This campaign utilized a highly specific delivery mechanism:
+ 
+1. **Delivery:** A spear-phishing email with a OneDrive link, downloading a ZIP containing a malicious Excel file (a shift from the malicious Word files used in mid-2024)
+2. **Dropper:** The malicious Excel file: a macro-enabled dropper Trend Micro named **ROAMINGMOUSE**. Requires the victim to click (changed from the mouse-move trigger used in the 2024 cases) before dropping its payload
+3. **First-stage backdoor:** ROAMINGMOUSE drops a legitimate signed application alongside a malicious loader DLL (**ANELLDR**:Trend Micro's name for what ESET independently describes as the same ANEL-loading mechanism) for DLL side-loading, decrypting and running ANEL in memory
+4. **Recon and triage:** operators take screenshots and run basic recon commands (`tasklist /v`, `net localgroup administrators`, `net user`) before deciding whether to escalate. Consistent with the victim-screening behavior ESET documented separately
+5. **Second-stage backdoor:** for confirmed valuable targets, NOOPDOOR is downloaded and launched via `MSBuild.exe`, potentially using a tool called **SharpHide** to launch it persistently and hide the MSBuild window
+6. **Stealthier C2:** the NOOPDOOR variant in this campaign added support for **DNS over HTTPS (DoH)**, which resulted in resolving its C2 domain through encrypted DNS providers like Google and Cloudflare, to hide suspicious domain lookups from network monitoring
+7. **Cleanup:** working directories are deleted with `rd /s /q` after the operation
+> **A nuance worth flagging:** It is tempting to describe NOOPDOOR (HiddenFace) simply as "a secondary backdoor," but that undersells how these tools work together. Intelligence indicates ANEL is used as the first-line backdoor immediately after compromise, while NOOPDOOR is only deployed in later stages once the operators decide the target is worth the deeper investment. Interestingly, no use of LODEINFO was observed in these 2024 attacks, a reminder that this actor's toolkit shifts over time, rather than staying fixed.
+
+> **On the Windows Sandbox forensics specifically:** a separate JSAC2025 talk by researchers at ITOCHU Cyber & Intelligence ("Hack The Sandbox: Unveiling the Truth Behind Disappearing Artifacts") covered detection and forensic methodology for the Windows Sandbox abuse technique in more depth than either JPCERT's or ESET's write-ups — including which host-side processes and event logs to monitor, and how to recover sandbox-side artifacts via `vmmem` and YARA rules. This is a genuinely distinct source from the ESET material above, not a duplicate of it.
+ 
+---
 
